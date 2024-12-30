@@ -1,0 +1,93 @@
+/*Write a C++ program to create a class called bank_acct with following data member (cust_name, cust_accno, balance) 
+and member functions (read_details, deposit, withdraw, display balance).
+Read and display details using array of objects and implement deposit and withdraw using inline*/
+#include<iostream>
+#include<iomanip>
+#include<string.h>
+using namespace std;
+class bank_acct
+{
+    private:
+    char cust_name[20];
+    char cust_accno[10];
+    int balance;
+    public:
+    bank_acct()
+    {
+        cust_name[0]='\0';
+        cust_accno[0]='\0';
+        balance=500;
+    }
+    void read_details();
+    void deposit();
+    void withdraw();
+    void searchAcc(char[],char);
+    void display_balance();
+};
+inline void bank_acct::read_details()
+{
+cout<<"enter the name of the customer: ";
+cin>>cust_name;
+cout<<"\n enter the bank account number: ";
+cin>>cust_accno;
+}
+inline void bank_acct::deposit()
+{
+    float amt;
+    cout<<"\n enter the amount to be deposited: ";
+    cin>>amt;
+    balance+=amt;
+}
+inline void bank_acct::withdraw()
+{
+    float amt;
+    cout<<"\n enter the amount to be withdrawn: ";
+    cin>>amt;
+    if(amt>balance)
+    cout<<"\nCANNOT WITHDRAW ACCOUNT!!\n";
+    else
+    balance-=amt;
+}
+inline void bank_acct::searchAcc(char accno[],char choice)
+{
+if(!(strcmp(accno,cust_accno)))
+{
+    if(choice=='d')
+    deposit();
+    else
+    withdraw();
+}
+display_balance();
+}
+inline void bank_acct::display_balance()
+{
+ cout<<"THE DETAILS OF THE CUSTOMER:\n";
+ cout<<setw(20)<<"Customer name:"<<cust_name<<endl;
+ cout<<setw(20)<<"Customer account number:"<<cust_accno<<endl;
+ cout<<setw(20)<<"The balance is:"<<balance<<endl;
+}
+
+int main()
+{
+    char ch;
+    char c;
+    int i=0;
+    char acc[20];
+    bank_acct p[10];
+    do
+    {
+     p[i].read_details();
+     i++;
+    cout<<endl<<"\nDo you want to enter other customer details?\nEnter(y/n): ";
+    cin>>c;
+    }while(c=='y');
+    cout<<"\nEnter the account number for transaction: ";
+    cin>>acc;
+    cout<<"choose deposit or withdraw:\nEnter(d/w): ";
+    cin>>ch;
+    for(int j=0;j<i;j++)
+ {
+ p[j].searchAcc(acc,ch);
+ }
+    return 0;
+}
