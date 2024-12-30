@@ -1,0 +1,129 @@
+/*•	Assume suitable data members and member functions for all the classes.
+  •	Display the number of publications for a teacher and percentage marks for a student.*/
+  #include<iostream>
+  using namespace std;
+  class person
+  {
+    private:
+    char name[20];
+    char aadhar[20];
+    char DOB[20];
+    public:
+    void getinfo()
+    {
+        cout<<"\nEnter the name of the person: ";
+        cin>>name;
+        cout<<"\nEnter the aadhar number of the person: ";
+        cin>>aadhar;
+        cout<<"\nEnter the date of birth: ";
+        cin>>DOB;
+    }
+    void display()
+    {
+        cout<<"\nName: "<<name;
+        cout<<"\nAadhar number: "<<aadhar;
+        cout<<"\nDOB: "<<DOB;
+    }
+  };
+  class teacher:virtual public person
+  {
+    int publications;
+    char Department[20];
+    public:
+    void teacherinfo()
+    {
+        getinfo();
+        cout<<"\nEnter the number of publications: ";
+        cin>>publications;
+        cout<<"\nEnter the department: ";
+        cin>>Department;
+    }
+    void displayTeacherInfo()
+    {
+        display();
+        cout<<"\nNumber of publications: "<<publications;
+        cout<<"\nDepartment: "<<Department;
+    }
+  };
+  class student:virtual public person
+  {
+    int roll;
+    char dep[10];
+    public:
+    void studentinfo()
+    {
+        cout<<"\nEnter the student's roll number: ";
+        cin>>roll;
+        cout<<"\nEnter the department: ";
+        cin>>dep;
+    }
+    
+    void displayStudentInfo()
+    {
+        cout<<"\nStudent roll number: "<<roll;
+        cout<<"\nDepartment: "<<dep;
+    }
+  };
+  class mark:virtual public person,public student
+  {
+    int marks[3];
+    float percentage;
+    public:
+    void studentMarks()
+    {
+        getinfo();
+        studentinfo();
+        for(int i=0;i<3;i++)
+        {
+        cout<<"\nEnter the subject"<<i+1<<" marks: ";
+        cin>>marks[i];
+    }
+    percentage=(marks[0]+marks[1]+marks[2])/3;
+    }
+    void displayStudentMarks()
+    {
+        display();
+        displayStudentInfo();
+        for(int i=0;i<3;i++)
+        {
+        cout<<"\nSubject"<<i+1<<" marks: "<<marks[i];
+    }
+    cout<<"\nPercentage is: "<<percentage<<"%"<<endl;
+    }
+  };
+  int main()
+  {
+   cout<<"ENTER TEACHER DETAILS: "<<endl;
+   teacher T[10];
+   char choice;
+   int k=0;
+   do
+   {
+    T[k].teacherinfo();
+    k++;
+    cout<<"\n\nDo you want to enter other teacher's details?\nEnter(y/n): ";
+    cin>>choice;
+   } while (choice=='y'&&k<3);
+   cout<<"\nTEACHER INFO:\n";
+   for(int j=0;j<k;j++)
+   {
+    T[j].displayTeacherInfo();
+   }
+   cout<<"\n\nENTER STUDENT DETAILS: "<<endl;
+   mark M[10];
+   char c;
+   int l=0;
+   do
+   {
+    M[l].studentMarks();
+    l++;
+    cout<<"\n\nDo you want to enter other student's details?\nEnter(y/n): ";
+    cin>>c;
+   } while (c=='y');
+   cout<<"\nSTUDENT INFO:\n";
+   for(int j=0;j<l;j++)
+   {
+    M[j].displayStudentMarks();
+   }
+   return 0;
+  }
