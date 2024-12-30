@@ -1,0 +1,68 @@
+#include<iostream>
+using namespace std;
+class time
+{
+    private:
+    int hours;
+    int min;
+    int sec;
+    public:
+    void constantVal()
+    {
+      hours=3;
+      min=30;
+      sec=15;
+    }
+    void getTime()
+    {
+        cout<<"enter the hours:"; cin>>hours;
+        cout<<"\nenter the minutes:"; cin>>min;
+        cout<<"\nenter the seconds:"; cin>>sec;
+    }
+    void display()
+    {
+        cout<<"the time is:" <<hours<<":"<<min<<":"<<sec<<endl;
+    }
+    void add(time X,time Y)
+    {int i=0;
+        hours=X.hours+Y.hours;
+        min=X.min+Y.min;
+        sec=X.sec+Y.sec;
+        while(min>59)
+        {
+            min=min-60;
+            i++;
+        }
+        hours=hours+i;
+    }
+    time add2(time Z)
+    {
+        time temp;
+        temp.hours=hours+Z.hours;
+        temp.min=min+Z.min;
+        temp.sec=sec+Z.sec;
+        while(temp.min>59)
+        {
+            temp.min=temp.min-60;
+            temp.hours=temp.hours+1;
+        }
+        return temp;
+    }
+};
+
+int main()
+{
+    int j;
+    time t[4];
+    for(j=0;j<2;j++)
+    {
+    t[j].getTime();
+   }
+    t[2].add(t[0],t[1]);
+    t[3]=t[0].add2(t[1]);
+for(j=0;j<4;j++)
+    {
+    t[j].display();
+   }
+return 0;
+}
