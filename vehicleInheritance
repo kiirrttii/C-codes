@@ -1,0 +1,43 @@
+/*Write a C++ program to demonstrate multilevel inheritance for the following:
+Suppose we have three classes Vehicle, FourWheeler, and Car. The class Vehicle is the base class, the class FourWheeler is derived 
+from it and the class Car is derived from the class FourWheeler. Class Vehicle has a method 'vehicle' that prints 'I am a vehicle',
+class FourWheeler has a method 'fourWheeler' that prints 'I have four wheels', and class Car has a method 'car'
+that prints 'I am a car'.So, as this is a multi-level inheritance; we can have access to all the other classes methods from the object 
+of the class Car.We invoke all the methods from a Car object and print the corresponding outputs of the methods. 
+So, if we invoke the methods in this order, car(), fourWheeler(), and vehicle(), then the output will be
+I am a car
+I have four wheels
+I am a vehicle */
+#include<iostream>
+using namespace std;
+class vehicle
+{   public:
+    void display()
+    {
+    cout<<"\nI am a vehicle.";
+    }
+};
+class FourWheeler:virtual public vehicle
+{
+  public:
+  void displayFourWheeler()
+  {
+    cout<<"\n I have four wheels.";
+  }
+};
+class car:virtual public vehicle,public FourWheeler
+{
+  public:
+  void displayCar()
+  {
+    cout<<"\n I am a car.";
+    displayFourWheeler();
+    display();
+  }
+};
+int main()
+{
+    car p;
+    p.displayCar();
+    return 0;
+}
